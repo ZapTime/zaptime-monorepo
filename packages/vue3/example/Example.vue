@@ -48,11 +48,11 @@ function reserveDemocall() {
 // };
 
 const config = ref<ZaptimeConfig>({
-  token: 'mlRgAVeQGqSoMjLzh5LGyyAF6xtSKKRi',
+  token: 'AsnMxrapnCnVWzzJsKKRDkFiwwQ42he5',
 
   compact: false,
 
-  // apiBaseUrl: 'https://api.zaptime.test/',
+  apiBaseUrl: 'https://api.zaptime.test/',
 
   // redirectAfterBookingUrl: 'https://google.com',
 

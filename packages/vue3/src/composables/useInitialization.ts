@@ -1,5 +1,5 @@
 import type { ZaptimeConfig } from '@zaptime/core';
-import { useConfig, useCalendar, mergeObjects, fetchRemoteConfiguration } from '@zaptime/core';
+import { useConfig, useCalendar, mergeObjects, fetchRemoteConfiguration, useLocations } from '@zaptime/core';
 import { ref } from 'vue';
 import { getAnalytics, buildConfig } from '../analytics';
 
@@ -9,6 +9,7 @@ export function useInitialization(config: ZaptimeConfig, calendarId?: string) {
 
   const { init: initCalendar } = useCalendar(calendarId);
   const { setConfig } = useConfig(calendarId);
+  const { setLocations } = useLocations(calendarId);
 
   /**
    * Setups the calendar and configuration based on the provided token and configuration.
@@ -30,6 +31,10 @@ export function useInitialization(config: ZaptimeConfig, calendarId?: string) {
           isEnabled.value = false;
           initLoaded.value = true;
           return;
+        }
+
+        if (initData.val.locations) {
+          setLocations(initData.val.locations);
         }
 
         isEnabled.value = true;

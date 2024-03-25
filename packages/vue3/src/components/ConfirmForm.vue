@@ -46,6 +46,21 @@
       </div>
 
       <div
+        v-if="isPhoneCall"
+        class="cal-mt-6 cal-max-w-[370px]"
+      >
+        <CalInput
+          v-model="phone"
+          :label="locale?.confirmationForm?.phone?.label"
+          :placeholder="locale?.confirmationForm?.phone?.placeholder"
+          type="text"
+          name="phone"
+          autocomplete="phone"
+          @blur="() => analytics?.track('phone_entered')"
+        ></CalInput>
+      </div>
+
+      <div
         v-if="selectedTimeSlot.seats > 1"
         class="cal-mt-6 cal-max-w-[370px]"
       >
@@ -86,7 +101,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue';
-import { useSelectedTimeSlot, book, useConfig, useDateFormatters } from '@zaptime/core';
+import { useSelectedTimeSlot, book, useConfig, useDateFormatters, useLocations } from '@zaptime/core';
 import PrimaryButton from './atomic/PrimaryButton.vue';
 import SecondaryButton from './atomic/SecondaryButton.vue';
 import CalInput from './DefaultCalendar/CalInput.vue';
@@ -97,12 +112,15 @@ const emits = defineEmits(['booking-confirmed', 'go-back']);
 const { selectedTimeSlot } = useSelectedTimeSlot(inject('calendarId'));
 const { getFormattedTime, getFormattedDayInMonth } = useDateFormatters(inject('calendarId'));
 const { config } = useConfig(inject('calendarId'));
+const { isPhoneCall } = useLocations(inject('calendarId'));
+
 const color2 = inject<string>('color2');
 const calendarId = inject<string>('calendarId');
 
 const email = ref('');
 const name = ref('');
 const seats = ref(1);
+const phone = ref('');
 
 const disabled = ref(false);
 

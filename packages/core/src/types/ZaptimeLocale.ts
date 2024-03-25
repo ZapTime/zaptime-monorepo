@@ -37,5 +37,9 @@ export default interface ZaptimeLocale {
       confirmBooking?: string;
       goBack?: string;
     };
+    phone?: {
+      label?: string;
+      placeholder?: string;
+    };
   };
 }

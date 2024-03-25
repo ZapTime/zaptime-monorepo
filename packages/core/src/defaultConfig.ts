@@ -28,6 +28,10 @@ const config: ZaptimeConfig = {
         confirmBooking: 'Confirm booking',
         goBack: 'Go back',
       },
+      phone: {
+        label: 'Your phone',
+        placeholder: 'Enter your phone',
+      },
     },
   },
   theme: {
